@@ -771,15 +771,44 @@ footer .fr {
       <h3>📸 Commit History</h3>
       <div class="github-placeholder">
         <div class="icon">🖼️</div>
-        <div>Screenshots of commits — coming soon</div>
+        <div>Commit screenshots — coming soon</div>
       </div>
     </div>
 
     <div class="github-card">
       <h3>🔀 Pull Request Logs</h3>
-      <div class="github-placeholder">
-        <div class="icon">🖼️</div>
-        <div>PR screenshots & code reviews — coming soon</div>
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Pull request logs will be documented as the project reaches its final sprint in Week 14. Current frontend contributions are evidenced through Figma designs below.</p>
+    </div>
+
+    <div class="github-card" style="grid-column:span 2">
+      <h3>🎨 Figma Screen Designs — CorroCheck Frontend Evidence</h3>
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">
+        Screenshots of the CorroCheck screens I designed and built as Frontend Developer.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0;">
+
+        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+          <a href="screen1.png" onclick="openLightbox(event, this.href)">
+            <img src="screen1.png" alt="Sign Up Screen" style="width:100%;display:block;cursor:zoom-in;transition:transform 0.2s;" title="Click to enlarge" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+          <div style="padding:12px 16px;">
+            <div style="font-family:'Geist Mono',monospace;font-size:0.7rem;color:var(--accent-light);margin-bottom:4px;">SCREEN 01</div>
+            <div style="font-size:0.9rem;font-weight:600;color:var(--text-bright);">Sign Up Screen</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:4px;">User registration with full name, email, and password fields.</div>
+          </div>
+        </div>
+
+        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+          <a href="screen2.png" onclick="openLightbox(event, this.href)">
+            <img src="screen2.png" alt="Upload & Inspection Screen" style="width:100%;display:block;cursor:zoom-in;transition:transform 0.2s;" title="Click to enlarge" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+          <div style="padding:12px 16px;">
+            <div style="font-family:'Geist Mono',monospace;font-size:0.7rem;color:var(--accent-light);margin-bottom:4px;">SCREEN 02</div>
+            <div style="font-size:0.9rem;font-weight:600;color:var(--text-bright);">Upload & Inspection Screen</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:4px;">New inspection form with corrosion type, GPS location, photo upload, and error states.</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
