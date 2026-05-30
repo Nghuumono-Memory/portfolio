@@ -406,6 +406,38 @@ footer .fr {
   .matlab-divider { width:100%; height:1px; }
   footer { flex-direction:column; gap:16px; padding:40px 24px; }
 }
+
+/* LIGHTBOX */
+.cert-img a { display:block; width:100%; height:100%; }
+.cert-img img {
+  width:100%; height:100%; object-fit:cover;
+  border-radius:8px; cursor:zoom-in;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cert-img img:hover {
+  transform:scale(1.02);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.3);
+}
+.lightbox-overlay {
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(0,0,0,0.92);
+  align-items:center; justify-content:center;
+  cursor:zoom-out;
+}
+.lightbox-overlay.active { display:flex; }
+.lightbox-overlay img {
+  max-width:90vw; max-height:90vh;
+  border-radius:12px;
+  box-shadow:0 24px 80px rgba(0,0,0,0.8);
+}
+.lightbox-close {
+  position:fixed; top:24px; right:32px;
+  color:white; font-size:2rem; cursor:pointer;
+  font-family:'Geist Mono',monospace; line-height:1;
+  opacity:0.7; transition:opacity 0.2s;
+}
+.lightbox-close:hover { opacity:1; }
+
 </style>
 </head>
 <body>
@@ -608,7 +640,7 @@ footer .fr {
     <div class="cert-card">
       <div class="cert-num">COURSE 01</div>
       <div class="cert-img" style="padding:0;border:none;">
-        <img src="certs/cert_01_matlab_onramp.jpg" alt="MATLAB Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        <a href="certs/cert_01_matlab_onramp.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_01_matlab_onramp.jpg" alt="MATLAB Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
       </div>
       <div class="cert-name">MATLAB Onramp</div>
       <div class="cert-status done">✓ Completed</div>
@@ -616,7 +648,7 @@ footer .fr {
     <div class="cert-card">
       <div class="cert-num">COURSE 02</div>
       <div class="cert-img" style="padding:0;border:none;">
-        <img src="certs/cert_02_machine_learning.jpg" alt="Machine Learning Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        <a href="certs/cert_02_machine_learning.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_02_machine_learning.jpg" alt="Machine Learning Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
       </div>
       <div class="cert-name">Machine Learning Onramp</div>
       <div class="cert-status done">✓ Completed</div>
@@ -649,7 +681,7 @@ footer .fr {
     <div class="cert-card">
       <div class="cert-num">COURSE 06</div>
       <div class="cert-img" style="padding:0;border:none;">
-        <img src="certs/cert_06_make_manipulate.jpg" alt="Make & Manipulate Matrices Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        <a href="certs/cert_06_make_manipulate.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_06_make_manipulate.jpg" alt="Make & Manipulate Matrices Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
       </div>
       <div class="cert-name">Make & Manipulate Matrices</div>
       <div class="cert-status done">✓ Completed</div>
@@ -795,5 +827,28 @@ document.querySelectorAll('.cert-card').forEach((el, i) => {
   observer.observe(el);
 });
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="lightbox-img" src="" alt="Certificate">
+</div>
+
+<script>
+function openLightbox(e, src) {
+  e.preventDefault();
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
 </body>
 </html>
