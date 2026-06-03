@@ -1,869 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nghuumono Ndateelela | CorroCheck Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #04080f;
-  --surface: #080f1a;
-  --surface2: #0c1525;
-  --border: #162035;
-  --border2: #1e2d47;
-  --accent: #2563eb;
-  --accent-light: #3b82f6;
-  --cyan: #0891b2;
-  --gold: #d97706;
-  --green: #059669;
-  --red: #dc2626;
-  --text: #cbd5e1;
-  --text-bright: #f1f5f9;
-  --muted: #475569;
-  --dim: #1e293b;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  font-family:'DM Sans', sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-body::before {
-  content:'';
-  position:fixed; inset:0;
-  background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(37,99,235,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(8,145,178,0.05) 0%, transparent 60%);
-  pointer-events:none; z-index:0;
-}
+  <base href="/">
 
-/* NAV */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:0 48px; height:60px;
-  background:rgba(4,8,15,0.85);
-  backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo {
-  font-family:'Geist Mono', monospace;
-  font-size:0.8rem; color:var(--muted);
-  letter-spacing:0.05em;
-}
-.nav-logo span { color:var(--accent-light); }
-.nav-links { display:flex; gap:0; list-style:none; }
-.nav-links a {
-  display:block; padding:8px 16px;
-  color:var(--muted); text-decoration:none;
-  font-size:0.8rem; font-weight:500;
-  letter-spacing:0.03em;
-  transition:color 0.2s;
-  border-radius:6px;
-}
-.nav-links a:hover { color:var(--text-bright); }
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Flet application.">
 
-/* PAGE WRAPPER */
-.page { position:relative; z-index:1; }
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Flet">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-192.png">
 
-/* HERO */
-.hero {
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  max-width:1200px; margin:0 auto;
-  padding:80px 48px 0;
-  gap:80px;
-}
-.hero-left { }
-.hero-tag {
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; letter-spacing:0.1em;
-  color:var(--accent-light);
-  margin-bottom:24px;
-}
-.hero-tag::before {
-  content:''; width:24px; height:1px; background:var(--accent-light);
-}
-.hero h1 {
-  font-family:'Instrument Serif', serif;
-  font-size:clamp(3rem,5vw,4.5rem);
-  font-weight:400; line-height:1.05;
-  color:var(--text-bright);
-  margin-bottom:8px;
-}
-.hero h1 em {
-  font-style:italic;
-  color:var(--accent-light);
-}
-.hero-role {
-  font-family:'Geist Mono', monospace;
-  font-size:0.75rem; color:var(--muted);
-  letter-spacing:0.08em; text-transform:uppercase;
-  margin-bottom:32px;
-  display:flex; align-items:center; gap:12px;
-}
-.hero-role::after { content:''; flex:1; height:1px; background:var(--border2); }
-.hero-desc {
-  font-size:1rem; line-height:1.75;
-  color:var(--muted); max-width:460px;
-  margin-bottom:40px;
-}
-.hero-chips { display:flex; flex-wrap:wrap; gap:8px; }
-.chip {
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; letter-spacing:0.05em;
-  padding:6px 12px;
-  border:1px solid var(--border2);
-  border-radius:4px;
-  color:var(--text);
-  background:var(--surface);
-}
-.chip.blue { border-color:rgba(37,99,235,0.4); color:var(--accent-light); background:rgba(37,99,235,0.06); }
-.chip.cyan { border-color:rgba(8,145,178,0.4); color:#22d3ee; background:rgba(8,145,178,0.06); }
-.chip.gold { border-color:rgba(217,119,6,0.4); color:#fbbf24; background:rgba(217,119,6,0.06); }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-.hero-right {
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:16px;
-  padding:32px;
-  font-family:'Geist Mono', monospace;
-  font-size:0.75rem;
-  line-height:1.8;
-}
-.code-line { display:flex; gap:16px; }
-.code-num { color:var(--muted); min-width:20px; text-align:right; user-select:none; }
-.code-str { color:#86efac; }
-.code-key { color:#93c5fd; }
-.code-val { color:#fca5a5; }
-.code-val2 { color:#fcd34d; }
-.code-comment { color:var(--muted); font-style:italic; }
-.code-bracket { color:var(--text); }
+  <!-- Flet specific -->
+  <meta name="flet-route-url-strategy" content="path">
+  <meta name="flet-web-pyodide" content="true">
+  <meta name="flet-websocket-endpoint-path" content="/ws">
 
-/* SECTION BASE */
-section { padding:100px 0; }
-.container { max-width:1200px; margin:0 auto; padding:0 48px; }
-.section-eyebrow {
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; letter-spacing:0.15em;
-  text-transform:uppercase; color:var(--accent-light);
-  margin-bottom:12px;
-  display:flex; align-items:center; gap:12px;
-}
-.section-eyebrow::before { content:'//'; color:var(--muted); }
-.section-heading {
-  font-family:'Instrument Serif', serif;
-  font-size:clamp(2rem,3.5vw,3rem);
-  font-weight:400; color:var(--text-bright);
-  margin-bottom:56px;
-  line-height:1.1;
-}
-.divider { height:1px; background:var(--border); }
+  <title>Flet</title>
+  <link rel="manifest" href="manifest.json">
 
-/* TIMELINE */
-.timeline-grid {
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:0 32px;
-}
-.tl-item {
-  display:contents;
-  opacity:0; transform:translateY(12px);
-  transition:all 0.5s ease;
-}
-.tl-item.vis { opacity:1; transform:translateY(0); }
-.tl-left {
-  display:flex; flex-direction:column; align-items:center;
-  padding-bottom:40px;
-}
-.tl-dot {
-  width:10px; height:10px; border-radius:50%;
-  background:var(--accent); flex-shrink:0;
-  box-shadow:0 0 0 3px rgba(37,99,235,0.15);
-  margin-top:4px;
-}
-.tl-dot.done { background:var(--green); box-shadow:0 0 0 3px rgba(5,150,105,0.15); }
-.tl-dot.active { background:var(--gold); box-shadow:0 0 0 3px rgba(217,119,6,0.2); animation:glow 2s infinite; }
-@keyframes glow { 0%,100%{box-shadow:0 0 0 3px rgba(217,119,6,0.2)} 50%{box-shadow:0 0 0 6px rgba(217,119,6,0.1)} }
-.tl-line { width:1px; flex:1; background:var(--border2); margin-top:6px; }
-.tl-right { padding-bottom:40px; }
-.tl-week {
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--accent-light); margin-bottom:6px;
-}
-.tl-title {
-  font-size:1rem; font-weight:600;
-  color:var(--text-bright); margin-bottom:6px;
-}
-.tl-desc { font-size:0.875rem; color:var(--muted); line-height:1.65; }
-.tl-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-.tl-tag {
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; padding:3px 8px;
-  border-radius:3px; letter-spacing:0.03em;
-}
-.tl-tag.doc { background:rgba(8,145,178,0.1); color:#22d3ee; border:1px solid rgba(8,145,178,0.2); }
-.tl-tag.fe { background:rgba(37,99,235,0.1); color:#93c5fd; border:1px solid rgba(37,99,235,0.2); }
-.tl-tag.design { background:rgba(217,119,6,0.1); color:#fcd34d; border:1px solid rgba(217,119,6,0.2); }
-.tl-tag.group { background:rgba(5,150,105,0.1); color:#6ee7b7; border:1px solid rgba(5,150,105,0.2); }
+  <script>
+    var webRenderer = "auto";
+    var useColorEmoji = false;
+  </script>
 
-/* MATLAB */
-.matlab-intro {
-  background:var(--surface); border:1px solid var(--border2);
-  border-radius:12px; padding:24px 32px;
-  margin-bottom:40px;
-  display:flex; align-items:center; gap:24px;
-}
-.matlab-stat { text-align:center; }
-.matlab-stat-num {
-  font-family:'Instrument Serif', serif;
-  font-size:2.5rem; color:var(--text-bright); line-height:1;
-}
-.matlab-stat-num span { color:var(--accent-light); }
-.matlab-stat-label {
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; color:var(--muted);
-  text-transform:uppercase; letter-spacing:0.1em;
-  margin-top:4px;
-}
-.matlab-divider { width:1px; height:60px; background:var(--border2); }
-.matlab-note { font-size:0.9rem; color:var(--muted); line-height:1.65; }
-.matlab-note strong { color:var(--text); }
-.cert-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(240px,1fr));
-  gap:16px;
-}
-.cert-card {
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:12px; padding:24px;
-  transition:border-color 0.3s, transform 0.3s;
-  opacity:0; transform:translateY(12px);
-  transition:opacity 0.4s ease, transform 0.4s ease, border-color 0.3s;
-}
-.cert-card.vis { opacity:1; transform:translateY(0); }
-.cert-card:hover { border-color:rgba(37,99,235,0.5); transform:translateY(-3px); }
-.cert-card.inprogress { border-style:dashed; opacity:0.6; }
-.cert-card.inprogress.vis { opacity:0.6; }
-.cert-num {
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; color:var(--muted);
-  letter-spacing:0.1em; margin-bottom:12px;
-}
-.cert-icon { font-size:1.8rem; margin-bottom:12px; }
-.cert-name {
-  font-size:0.95rem; font-weight:600;
-  color:var(--text-bright); margin-bottom:16px;
-  line-height:1.35;
-}
-.cert-status {
-  display:inline-flex; align-items:center; gap:6px;
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; padding:4px 10px;
-  border-radius:4px;
-}
-.cert-status.done {
-  background:rgba(5,150,105,0.1); color:#6ee7b7;
-  border:1px solid rgba(5,150,105,0.2);
-}
-.cert-img {
-  width:100%; aspect-ratio:16/10;
-  background:var(--surface2);
-  border:1px dashed var(--border2);
-  border-radius:8px;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:6px; margin-bottom:16px;
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; color:var(--muted);
-  letter-spacing:0.05em; text-align:center;
-  overflow:hidden;
-}
-.cert-img img {
-  width:100%; height:100%; object-fit:cover;
-  border-radius:8px; display:none;
-}
-.cert-img .img-icon { font-size:1.4rem; opacity:0.4; }
-.cert-status.pending {
-  background:rgba(217,119,6,0.1); color:#fcd34d;
-  border:1px solid rgba(217,119,6,0.2);
-}
+  <script>webRenderer="canvaskit";</script>
+  <script>useColorEmoji=false;</script>
 
-/* BLOG */
-.blog-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-.blog-card {
-  background:var(--surface); border:1px solid var(--border2);
-  border-radius:12px; overflow:hidden;
-  transition:border-color 0.3s;
-}
-.blog-card:hover { border-color:rgba(37,99,235,0.4); }
-.blog-card.full { grid-column:span 2; }
-.blog-video {
-  aspect-ratio:16/9;
-  background:var(--surface2);
-  border-bottom:1px solid var(--border);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:12px;
-}
-.play-btn {
-  width:56px; height:56px; border-radius:50%;
-  background:rgba(37,99,235,0.15);
-  border:1px solid rgba(37,99,235,0.3);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.2rem; opacity:0.6;
-}
-.coming-label {
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; color:var(--muted);
-  letter-spacing:0.05em;
-}
-.blog-body { padding:24px; }
-.blog-cat {
-  font-family:'Geist Mono', monospace;
-  font-size:0.65rem; letter-spacing:0.1em;
-  text-transform:uppercase; color:var(--accent-light);
-  margin-bottom:10px;
-}
-.blog-title {
-  font-family:'Instrument Serif', serif;
-  font-size:1.3rem; color:var(--text-bright);
-  margin-bottom:12px; line-height:1.3;
-}
-.blog-excerpt { font-size:0.875rem; color:var(--muted); line-height:1.7; }
-.math-block {
-  background:var(--surface2); border:1px solid var(--border2);
-  border-left:3px solid var(--accent);
-  border-radius:0 8px 8px 0;
-  padding:16px 20px; margin:16px 0;
-  font-family:'Geist Mono', monospace;
-  font-size:0.85rem; color:#c4b5fd;
-  overflow-x:auto;
-}
+  
+        <script>
+            var micropipIncludePre = false;
+            var pythonModuleName = "main";
+        </script>
+        <script src="python.js"></script>
+        
 
-/* GITHUB EVIDENCE */
-.github-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-.github-card {
-  background:var(--surface); border:1px solid var(--border2);
-  border-radius:12px; padding:28px;
-}
-.github-card h3 {
-  font-family:'Geist Mono', monospace;
-  font-size:0.75rem; color:var(--accent-light);
-  letter-spacing:0.08em; text-transform:uppercase;
-  margin-bottom:16px;
-  display:flex; align-items:center; gap:8px;
-}
-.github-placeholder {
-  aspect-ratio:16/7;
-  background:var(--surface2);
-  border:1px dashed var(--border2);
-  border-radius:8px;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:8px;
-  color:var(--muted); font-size:0.8rem;
-}
-.github-placeholder .icon { font-size:1.5rem; opacity:0.4; }
-.impact-box {
-  background:var(--surface2); border:1px solid var(--border2);
-  border-radius:8px; padding:20px;
-  font-size:0.9rem; color:var(--muted); line-height:1.7;
-}
-.impact-box strong { color:var(--text-bright); }
-
-/* FOOTER */
-footer {
-  border-top:1px solid var(--border);
-  padding:40px 48px;
-  max-width:1200px; margin:0 auto;
-  display:flex; justify-content:space-between; align-items:center;
-}
-footer .fl {
-  font-family:'Instrument Serif', serif;
-  font-size:1.1rem; color:var(--text-bright);
-}
-footer .fr {
-  font-family:'Geist Mono', monospace;
-  font-size:0.7rem; color:var(--muted);
-  text-align:right; line-height:1.8;
-}
-
-@media(max-width:900px){
-  nav { padding:0 24px; }
-  .nav-links { display:none; }
-  .hero { grid-template-columns:1fr; padding:100px 24px 40px; gap:40px; }
-  .hero-right { display:none; }
-  .container { padding:0 24px; }
-  .blog-grid, .github-grid { grid-template-columns:1fr; }
-  .blog-card.full { grid-column:span 1; }
-  .matlab-intro { flex-direction:column; align-items:flex-start; }
-  .matlab-divider { width:100%; height:1px; }
-  footer { flex-direction:column; gap:16px; padding:40px 24px; }
-}
-
-/* LIGHTBOX */
-.cert-img a { display:block; width:100%; height:100%; }
-.cert-img img {
-  width:100%; height:100%; object-fit:cover;
-  border-radius:8px; cursor:zoom-in;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.cert-img img:hover {
-  transform:scale(1.02);
-  box-shadow: 0 8px 32px rgba(37,99,235,0.3);
-}
-.lightbox-overlay {
-  display:none; position:fixed; inset:0; z-index:1000;
-  background:rgba(0,0,0,0.92);
-  align-items:center; justify-content:center;
-  cursor:zoom-out;
-}
-.lightbox-overlay.active { display:flex; }
-.lightbox-overlay img {
-  max-width:90vw; max-height:90vh;
-  border-radius:12px;
-  box-shadow:0 24px 80px rgba(0,0,0,0.8);
-}
-.lightbox-close {
-  position:fixed; top:24px; right:32px;
-  color:white; font-size:2rem; cursor:pointer;
-  font-family:'Geist Mono',monospace; line-height:1;
-  opacity:0.7; transition:opacity 0.2s;
-}
-.lightbox-close:hover { opacity:1; }
-
-</style>
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "3021224361";
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
+
 <body>
-<div class="page">
+  <div id="loading">
+    <style>
+      body {
+        inset: 0;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+      }
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">NN<span>.</span>portfolio</div>
-  <ul class="nav-links">
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#matlab">MATLAB</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#github">Evidence</a></li>
-  </ul>
-</nav>
+      #loading {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
 
-<!-- HERO -->
-<section style="padding:0">
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">COMPUTER PROGRAMMING I · SEM 1, 2026</div>
-    <div style="display:block;border-radius:50%;overflow:hidden;width:90px;height:90px;border:3px solid rgba(59,130,246,0.4);box-shadow:0 0 0 5px rgba(59,130,246,0.08);margin-bottom:20px;">
-      <img src="profile.jpg" alt="Nghuumono Ndateelela" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-    </div>
-    <h1>Nghuumono<br><em>Ndateelela</em></h1>
-    <div class="hero-role">Frontend Developer</div>
-    <p class="hero-desc">
-      2nd Year Electrical Engineering student at UNAM. 
-      This portfolio documents my individual contributions to <strong style="color:var(--text)">CorroCheck</strong> — 
-      a corrosion monitoring app built for Mining Engineering — alongside my MATLAB course achievements.
-    </p>
-    <div class="hero-chips">
-      <div class="chip blue">CorroCheck App</div>
-      <div class="chip">Mining Engineering</div>
-      <div class="chip cyan">Figma · React Native</div>
-      <div class="chip gold">7 MATLAB Courses</div>
-      <div class="chip">UNAM · 2nd Year</div>
-    </div>
+      #loading img {
+        animation: 1s ease-in-out 0s infinite alternate breathe;
+        opacity: .66;
+        transition: opacity .4s;
+      }
+
+      #loading.main_done img {
+        opacity: 1;
+      }
+
+      #loading.init_done img {
+        animation: .33s ease-in-out 0s 1 forwards zooooom;
+        opacity: .05;
+      }
+
+      @keyframes breathe {
+        from {
+          transform: scale(0.4);
+          opacity: 1.0;
+        }
+
+        to {
+          transform: scale(0.35);
+          opacity: .7;
+        }
+      }
+
+      @keyframes zooooom {
+        from {
+          transform: scale(0.4)
+        }
+
+        to {
+          transform: scale(10)
+        }
+      }
+    </style>
+    <img src="icons/loading-animation.png" alt="Loading..." />
   </div>
-
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TIMELINE -->
-<section id="timeline">
-<div class="container">
-  <div class="section-eyebrow">Project Timeline</div>
-  <div class="section-heading">My Weekly Contributions</div>
-  <div class="timeline-grid">
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 1 · 02–06 Mar</div>
-        <div class="tl-title">Group Formation & Project Setup</div>
-        <div class="tl-desc">Joined the CorroCheck group, assigned as Frontend Developer. Helped set up the GitHub repository and configured the Expo + React Native + Firebase environment on my machine.</div>
-        <div class="tl-tags"><span class="tl-tag group">Group</span><span class="tl-tag fe">Frontend</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 2 · 09–13 Mar</div>
-        <div class="tl-title">Idea Brainstorming & Environment Setup</div>
-        <div class="tl-desc">Participated in internal brainstorming sessions for CorroCheck's core features. Set up Expo, React Native, and Firebase development environment. Began planning the app's screen structure and user flow.</div>
-        <div class="tl-tags"><span class="tl-tag fe">Frontend</span><span class="tl-tag design">Design</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Weeks 3–4 · 16–27 Mar</div>
-        <div class="tl-title">Pitch Week Preparation</div>
-        <div class="tl-desc">Contributed to the CorroCheck pitch presentation to Mr. Abisai. Began sketching initial screen ideas and thinking about the app's visual design direction.</div>
-        <div class="tl-tags"><span class="tl-tag design">Design</span><span class="tl-tag group">Group</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Weeks 5–8 · 30 Mar–25 Apr</div>
-        <div class="tl-title">SRS Documentation & MATLAB Courses</div>
-        <div class="tl-desc">Led the writing of the Software Requirements Specification (SRS) document — problem statement, scope, target users, functional requirements (FR-001 onwards), non-functional requirements, constraints, and use case diagrams. Simultaneously completed 7 MATLAB courses on MathWorks Learning Center.</div>
-        <div class="tl-tags"><span class="tl-tag doc">SRS Lead</span><span class="tl-tag doc">Documentation</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 9 · 27 Apr–01 May</div>
-        <div class="tl-title">Figma Design — Onboarding & Navigation</div>
-        <div class="tl-desc">Started designing CorroCheck screens on Figma — onboarding flow, splash screen, and the main navigation structure. Focused on a clean, industrial UI appropriate for mining engineers in the field.</div>
-        <div class="tl-tags"><span class="tl-tag design">Figma</span><span class="tl-tag fe">Frontend</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 10 · 04–08 May</div>
-        <div class="tl-title">Prototype — Core Feature Screens</div>
-        <div class="tl-desc">Designed and coded core feature screens in React Native — corrosion report forms, data display layouts, and the dashboard overview. Translated Figma designs into working Expo components.</div>
-        <div class="tl-tags"><span class="tl-tag fe">React Native</span><span class="tl-tag design">Figma</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 11 · 11–15 May</div>
-        <div class="tl-title">Prototype — Remaining Screens & Interactivity</div>
-        <div class="tl-desc">Completed remaining UI screens and linked navigation between them. Ensured all screens were consistent with the Figma designs and worked correctly on both Android and iOS.</div>
-        <div class="tl-tags"><span class="tl-tag fe">Frontend</span><span class="tl-tag design">Figma</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot active"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 12 · 18–30 May</div>
-        <div class="tl-title">Prototype Refinement & Submission</div>
-        <div class="tl-desc">Refining the prototype based on internal feedback. Polishing UI components, fixing layout issues, and ensuring all screens are pixel-perfect before the final submission to Mr. Abisai by 30 May 23:59.</div>
-        <div class="tl-tags"><span class="tl-tag fe">Frontend</span><span class="tl-tag design">Polish</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 13 · 01–06 Jun</div>
-        <div class="tl-title">Live Expo Demo</div>
-        <div class="tl-desc">Live progress demonstration to Mr. Abisai. Will present the frontend screens I designed and coded, and incorporate feedback for the final sprint.</div>
-        <div class="tl-tags"><span class="tl-tag group">Upcoming</span></div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-      <div class="tl-right">
-        <div class="tl-week">Week 14 · 08–13 Jun</div>
-        <div class="tl-title">Final Sprint & APK Submission</div>
-        <div class="tl-desc">Final implementation of feedback, building the APK via EAS Build, and final submission by 13 June. Ensuring all frontend screens are production-ready and the UI is fully polished.</div>
-        <div class="tl-tags"><span class="tl-tag group">Upcoming</span><span class="tl-tag fe">Frontend</span></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- MATLAB -->
-<section id="matlab">
-<div class="container">
-  <div class="section-eyebrow">MATLAB Achievement Hub</div>
-  <div class="section-heading">MathWorks Certificates</div>
-
-  <div class="matlab-intro">
-    <div class="matlab-stat">
-      <div class="matlab-stat-num"><span>7</span>/8</div>
-      <div class="matlab-stat-label">Completed</div>
-    </div>
-    <div class="matlab-divider"></div>
-    <div class="matlab-note">
-      <strong>7 of 8 required MATLAB courses completed</strong> on the MathWorks Learning Center, each with a certificate of completion and an accompanying report. The 8th course is currently in progress.
-    </div>
-  </div>
-
-  <div class="cert-grid">
-    <div class="cert-card">
-      <div class="cert-num">COURSE 01</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_01_matlab_onramp.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_01_matlab_onramp.jpg" alt="MATLAB Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">MATLAB Onramp</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 02</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_02_machine_learning.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_02_machine_learning.jpg" alt="Machine Learning Onramp Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">Machine Learning Onramp</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 03</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_03_functions.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_03_functions.jpg" alt="Functions Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">The How & Why of Writing Functions</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 04</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_04_vectors_matrices.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_04_vectors_matrices.jpg" alt="Vectors & Matrices Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">Calculations with Vectors & Matrices</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 05</div>
-      <div class="cert-img">
-        <div class="img-icon">🖼️</div>
-        <div>Certificate image<br>coming soon</div>
-      </div>
-      <div class="cert-name">Simulink Onramp</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 06</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_06_make_manipulate.jpg" target="_blank" onclick="openLightbox(event, this.href)"><img src="certs/cert_06_make_manipulate.jpg" alt="Make & Manipulate Matrices Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">Make & Manipulate Matrices</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-num">COURSE 07</div>
-      <div class="cert-img" style="padding:0;border:none;">
-        <a href="certs/cert_07_explore_data.jpg" onclick="openLightbox(event, this.href)"><img src="certs/cert_07_explore_data.jpg" alt="Explore Data Certificate" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;" title="Click to view full certificate"></a>
-      </div>
-      <div class="cert-name">Explore Data with MATLAB Plots</div>
-      <div class="cert-status done">✓ Completed</div>
-    </div>
-    <div class="cert-card inprogress">
-      <div class="cert-num">COURSE 08</div>
-      <div class="cert-img">
-        <div class="img-icon">⏳</div>
-        <div>Certificate coming<br>when completed</div>
-      </div>
-      <div class="cert-name">8th Course</div>
-      <div class="cert-status pending">⏳ In Progress</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- BLOG -->
-<section id="blog">
-<div class="container">
-  <div class="section-eyebrow">Technical Blog</div>
-  <div class="section-heading">Confidence in Concepts</div>
-  <div class="blog-grid">
-
-    <div class="blog-card full">
-      <div class="blog-video" style="aspect-ratio:16/6;">
-        <div class="play-btn">▶</div>
-        <div class="coming-label">Video explanation coming soon</div>
-      </div>
-      <div class="blog-body">
-        <div class="blog-cat">Featured · Video Blog</div>
-        <div class="blog-title">What I Learned in Computer Programming This Semester</div>
-        <div class="blog-excerpt">A recorded video walkthrough explaining the key programming concepts I learned — from Python basics and functions, to building mobile app UIs with React Native and integrating Firebase as a backend. Video will be uploaded here shortly.</div>
-      </div>
-    </div>
-
-    <div class="blog-card">
-      <div class="blog-body">
-        <div class="blog-cat">Concept · Functions</div>
-        <div class="blog-title">Why Functions Make Code Better</div>
-        <div class="blog-excerpt">
-          A function is a reusable block of code that performs a specific task. Instead of writing the same logic repeatedly, you define it once and call it anywhere. In CorroCheck, we used functions to handle corrosion calculations and Firebase data fetching.<br><br>
-          A simple Python example:
-        </div>
-        <div class="math-block">def calculate_corrosion_rate(mass_loss, area, time):<br>&nbsp;&nbsp;&nbsp;&nbsp;rate = mass_loss / (area × time)<br>&nbsp;&nbsp;&nbsp;&nbsp;return rate</div>
-        <div class="blog-excerpt">The corrosion rate formula used in mining is: <strong style="color:var(--text)">CR = (K × W) / (A × T × D)</strong> where W = mass loss, A = area, T = time, D = density.</div>
-      </div>
-    </div>
-
-    <div class="blog-card">
-      <div class="blog-body">
-        <div class="blog-cat">Concept · Variables & Data</div>
-        <div class="blog-title">Variables, Data Types & Why They Matter</div>
-        <div class="blog-excerpt">
-          Every piece of information in a program is stored in a variable. The data type determines what operations you can perform. In CorroCheck, we store corrosion readings as floats, location names as strings, and report dates as datetime objects.<br><br>
-        </div>
-        <div class="math-block">reading = 0.45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# float<br>location = "Shaft 3"&nbsp;&nbsp;&nbsp;&nbsp;# string<br>flagged = True&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# boolean</div>
-        <div class="blog-excerpt">Choosing the right data type prevents bugs and makes code efficient — a key lesson from both Python class and the MATLAB Onramp course.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<div class="divider"></div>
-
-<!-- GITHUB EVIDENCE -->
-<section id="github">
-<div class="container">
-  <div class="section-eyebrow">GitHub Evidence</div>
-  <div class="section-heading">My Contributions to CorroCheck</div>
-  <div class="github-grid">
-
-    <div class="github-card" style="grid-column:span 2">
-      <h3>🗂️ Frontend Evidence — CorroCheck Contributions</h3>
-      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:20px;line-height:1.6;">
-        All evidence of my individual frontend contributions to CorroCheck — Figma designs and coded React Native screens. Click any image to view it in full size.
-      </p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
-
-        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
-          <a href="screen1.png" onclick="openLightbox(event, this.href)">
-            <img src="screen1.png" alt="Sign Up Screen Figma" style="width:100%;height:140px;object-fit:cover;display:block;cursor:zoom-in;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          </a>
-          <div style="padding:10px 12px;">
-            <div style="font-family:'Geist Mono',monospace;font-size:0.6rem;color:var(--accent-light);">FIGMA · 01</div>
-            <div style="font-size:0.8rem;font-weight:600;color:var(--text-bright);margin-top:2px;">Sign Up Screen</div>
-          </div>
-        </div>
-
-        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
-          <a href="screen2.png" onclick="openLightbox(event, this.href)">
-            <img src="screen2.png" alt="Upload Screen Figma" style="width:100%;height:140px;object-fit:cover;display:block;cursor:zoom-in;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          </a>
-          <div style="padding:10px 12px;">
-            <div style="font-family:'Geist Mono',monospace;font-size:0.6rem;color:var(--accent-light);">FIGMA · 02</div>
-            <div style="font-size:0.8rem;font-weight:600;color:var(--text-bright);margin-top:2px;">Upload Screen</div>
-          </div>
-        </div>
-
-        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
-          <a href="Screenshot_2026-05-30_203806.jpg" onclick="openLightbox(event, this.href)">
-            <img src="Screenshot_2026-05-30_203806.jpg" alt="SignUpScreen.js" style="width:100%;height:140px;object-fit:cover;display:block;cursor:zoom-in;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          </a>
-          <div style="padding:10px 12px;">
-            <div style="font-family:'Geist Mono',monospace;font-size:0.6rem;color:var(--accent-light);">CODE · 01</div>
-            <div style="font-size:0.8rem;font-weight:600;color:var(--text-bright);margin-top:2px;">SignUpScreen.js</div>
-          </div>
-        </div>
-
-        <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
-          <a href="Screenshot_2026-05-30_203846.jpg" onclick="openLightbox(event, this.href)">
-            <img src="Screenshot_2026-05-30_203846.jpg" alt="UploadScreen.js" style="width:100%;height:140px;object-fit:cover;display:block;cursor:zoom-in;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          </a>
-          <div style="padding:10px 12px;">
-            <div style="font-family:'Geist Mono',monospace;font-size:0.6rem;color:var(--accent-light);">CODE · 02</div>
-            <div style="font-size:0.8rem;font-weight:600;color:var(--text-bright);margin-top:2px;">UploadScreen.js</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div style="margin-top:16px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-        <div style="font-family:'Geist Mono',monospace;font-size:0.65rem;color:var(--muted);">📌 NOTE</div>
-        <div style="font-size:0.8rem;color:var(--muted);margin-top:4px;line-height:1.6;">Commit history and pull request logs will be added here as the project progresses into the final sprint (Week 14).</div>
-      </div>
-    </div>
-
-    <div class="github-card" style="grid-column:span 2">
-      <h3>💡 Impact Summary</h3>
-      <div class="impact-box">
-        As <strong>Frontend Developer</strong> on CorroCheck — a corrosion monitoring app for the <strong>Mining Engineering</strong> module — my specific contributions include:<br><br>
-        🎨 <strong>UI/UX Design:</strong> Designed all app screens in Figma, establishing the visual language and component system used across the entire app by the team.<br><br>
-        💻 <strong>Frontend Code:</strong> Translated Figma designs into functional React Native + Expo components, including the corrosion report forms, dashboard, and navigation structure.<br><br>
-        🧩 <strong>Component Architecture:</strong> Built reusable UI components that ensured a consistent look and feel across all screens of the CorroCheck app.
-      </div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<div class="divider"></div>
-
-<footer>
-  <div class="fl">Nghuumono Ndateelela</div>
-  <div class="fr">
-    Electrical Engineering · UNAM · 2026<br>
-    Computer Programming I · Web Portfolio · 15% CA
-  </div>
-</footer>
-
-</div>
-
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('vis'), (entry.target.dataset.d || 0));
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.tl-item').forEach((el, i) => {
-  el.dataset.d = i * 80;
-  observer.observe(el);
-});
-document.querySelectorAll('.cert-card').forEach((el, i) => {
-  el.dataset.d = i * 60;
-  observer.observe(el);
-});
-</script>
-
-<!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
-  <img id="lightbox-img" src="" alt="Certificate">
-</div>
-
-<script>
-function openLightbox(e, src) {
-  e.preventDefault();
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLightbox();
-});
-</script>
-
+  <script>
+    window.addEventListener('load', function () {
+      var loading = document.querySelector('#loading');
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function (engineInitializer) {
+        loading.classList.add('main_done');
+        return engineInitializer.initializeEngine({
+          renderer: webRenderer,
+          useColorEmoji: useColorEmoji,
+        });
+      }).then(function (appRunner) {
+        loading.classList.add('init_done');
+        return appRunner.runApp();
+      }).then(function (app) {
+        // Wait a few milliseconds so users can see the "zoooom" animation
+        // before getting rid of the "loading" div.
+        window.setTimeout(function () {
+          loading.remove();
+        }, 200);
+      });
+    });
+  </script>
 </body>
+
 </html>
